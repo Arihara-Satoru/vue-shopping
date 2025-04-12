@@ -110,7 +110,8 @@ export default {
       const res = await login(this.mobile, this.sms)
       this.$store.commit('user/setUserInfo', res.data)
       console.log(res)
-      this.$router.push('/home')
+      const url = this.$route.query.backUrl || '/home'
+      this.$router.replace(url)
       this.$toast('登录成功')
     }
   },

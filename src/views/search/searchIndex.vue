@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <van-nav-bar title="商品搜索" left-arrow @click-left="$router.go(-1)" />
+    <van-nav-bar title="商品搜索" left-arrow @click-left="$router.replace('/home')" />
 
     <van-search @keydown.enter="handleSearch" v-model="searchData" show-action placeholder="请输入搜索关键词" clearable>
       <template #action>
@@ -35,7 +35,7 @@ export default {
     handleSearch () {
       this.searchList.unshift(this.searchData)
       setSearchHistory(this.searchList)
-      this.$router.push(`/searchlist/search=${this.searchData}`)
+      this.$router.push(`/searchlist?search=${this.searchData}`)
     },
     handleHistory (item) {
       this.searchData = item

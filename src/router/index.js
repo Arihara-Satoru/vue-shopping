@@ -61,8 +61,7 @@ const router = new VueRouter({
 const authorityUrl = [
   '/user',
   '/myorder',
-  '/pay',
-  '/login'
+  '/pay'
 ]
 
 router.beforeEach((to, from, next) => {

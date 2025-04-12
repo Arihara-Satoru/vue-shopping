@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import user from './modules/user'
+import cart from './modules/cart' // 确保路径正确
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    user
+    user,
+    cart
   }
 })
