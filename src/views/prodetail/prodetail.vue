@@ -101,7 +101,7 @@
         </div>
         <div class="showbtn" v-if="detail.stock_total > 0">
           <div class="btn" v-if="mode === 'cart'" @click="addCart">加入购物车</div>
-          <div class="btn now" v-else>立刻购买</div>
+          <div class="btn now" @click="goBuyNow" v-else>立刻购买</div>
         </div>
         <div class="btn-none" v-else>该商品已抢完</div>
       </div>
@@ -114,9 +114,11 @@ import { getProComments, getProCommentsCount, getProductDetail } from '@/api/pro
 import { addCart } from '@/api/cart'
 import defaultImg from '@/assets/default-avatar.png'
 import countBox from '@/components/countBox'
+import loginConfirm from '@/mixins/loginConfirm'
 export default {
   name: 'ProDetail',
   components: { countBox },
+  mixins: [loginConfirm],
   data () {
     return {
       images: [],
@@ -129,6 +131,11 @@ export default {
       changeCount: 1,
       cartTotal: 0,
       current: 0
+    }
+  },
+  computed: {
+    goodsId () {
+      return this.$route.query.id
     }
   },
   methods: {
@@ -157,22 +164,23 @@ export default {
       this.showPannel = true
     },
     async addCart () {
-      if (!this.$store.getters.getToken) {
-        this.$dialog.confirm({
-          title: '温馨提示',
-          message: '此时需要先登录才能继续操作哦',
-          confirmButtonText: '去登录',
-          cancelButtonText: '再逛逛'
-        }).then(() => {
-          this.$router.replace(
-            { path: '/login', query: { backUrl: this.$route.fullPath } }
-          )
-        }).catch(() => { })
-      }
+      if (this.loginConfirm()) return
       const { data } = await addCart(this.$route.query.id, this.changeCount, '0')
       this.cartTotal = data.cartTotal
       this.$toast('加入购物车成功')
       this.showPannel = false
+    },
+    goBuyNow () {
+      if (this.loginConfirm()) return
+      this.$router.push({
+        path: '/pay',
+        query: {
+          mode: 'buyNow',
+          goodsId: this.goodsId,
+          goodsSkuId: this.detail.skuList[0].goods_sku_id,
+          goodsNum: this.changeCount
+        }
+      })
     }
   },
   created () {

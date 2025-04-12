@@ -59,7 +59,6 @@ const router = new VueRouter({
 })
 
 const authorityUrl = [
-  '/user',
   '/myorder',
   '/pay'
 ]

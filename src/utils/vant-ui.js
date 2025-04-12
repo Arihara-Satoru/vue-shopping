@@ -1,9 +1,11 @@
 import Vue from 'vue'
 // 1. 引入你需要的组件
-import { Checkbox, Dialog, ActionSheet, Rate, Icon, Search, Swipe, SwipeItem, Grid, GridItem, Button, Tabbar, TabbarItem, NavBar, Field, CellGroup, Toast } from 'vant'
+import { Tab, Tabs, Checkbox, Dialog, ActionSheet, Rate, Icon, Search, Swipe, SwipeItem, Grid, GridItem, Button, Tabbar, TabbarItem, NavBar, Field, CellGroup, Toast } from 'vant'
 // 2. 引入组件样式
 import 'vant/lib/index.css'
 
+Vue.use(Tabs)
+Vue.use(Tab)
 Vue.use(Checkbox)
 Vue.use(Dialog)
 Vue.use(ActionSheet)

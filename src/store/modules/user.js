@@ -13,6 +13,7 @@ export default {
       storage.setInfo(payload)
     }
   },
-  actions: {},
+  actions: {
+  },
   getters: {}
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <van-nav-bar title="用户登录" left-text="返回" right-text="按钮" left-arrow @click-left="onClickLeft"
+      <van-nav-bar title="用户登录" left-text="返回" right-text="一键填写" left-arrow @click-left="onClickLeft"
         @click-right="onClickRight" />
     </header>
     <main>
@@ -53,6 +53,9 @@ export default {
       ],
       totalSecond: 60, // 倒计时总秒数
       nowSecond: 60, // 当前倒计时秒数
+      line1: 15751776629,
+      line2: '2b9s',
+      line3: 246810,
       timer: null
     }
   },
@@ -64,7 +67,9 @@ export default {
       this.$router.back()
     },
     onClickRight () {
-      this.$router.push('/')
+      this.mobile = this.line1
+      this.picCode = this.line2
+      this.sms = this.line3
     },
     async onsubmit () {
       const { data: { base64, key } } = await getCode()
